@@ -4,8 +4,8 @@ from laser_class import Laser
 
 class Player():
     def __init__(self) -> None:
-        self.player_fly_0 = pygame.image.load("assets//player_spaceship//player_spaceship_fly_0.png").convert_alpha()
-        self.player_fly_1 = pygame.image.load("assets//player_spaceship//player_spaceship_fly_1.png").convert_alpha()
+        self.player_fly_0 = pygame.transform.scale(pygame.image.load("assets//player_spaceship//player_spaceship_fly_0.png").convert_alpha(), (160, 150))
+        self.player_fly_1 = pygame.transform.scale(pygame.image.load("assets//player_spaceship//player_spaceship_fly_1.png").convert_alpha(), (160, 150))
         self.player_frames = [self.player_fly_0, self.player_fly_1]
         self.animation_index = 0
 
@@ -13,7 +13,7 @@ class Player():
         self.laser_sound = pygame.mixer.Sound("music//laser.wav")
 
         self.image = self.player_frames[self.animation_index]
-        self.rect = self.image.get_rect(midbottom=(400, 450))
+        self.rect = self.image.get_rect(midbottom=(400, 800))
 
         self.lasers = pygame.sprite.Group()
     
@@ -49,3 +49,16 @@ class Player():
         screen.blit(self.image, self.rect)
         self.lasers.update()
         self.lasers.draw(screen)
+
+if __name__ == "__main__":
+    pygame.init()
+    screen = pygame.display.set_mode((800, 800))
+    player = Player()
+    clcok = pygame.time.Clock()
+    while True:
+        screen.fill("black")
+        events = {"events" : pygame.event.get(), "keys" : pygame.key.get_pressed()}
+        player.update(events)
+        player.draw(screen)
+        pygame.display.update()
+        clcok.tick(60)
