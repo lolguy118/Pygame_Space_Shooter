@@ -4,6 +4,7 @@ from os import listdir
 
 
 class Enemy(pygame.sprite.Sprite):
+    # TODO add "assets//astroid" to all of the asteroid frames
     type_to_frames = {
         "spaceship": [
             "assets//enemy_spaceship//enemy_spaceship_fly_0.png",
