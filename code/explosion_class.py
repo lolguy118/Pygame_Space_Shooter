@@ -10,6 +10,11 @@ class Explosion(pygame.sprite.Sprite):
             self.frames.append(f"assets//explosion//{frame}")
         self.animation_index = 0
 
+        pygame.mixer.init()
+        self.explosion_sound = pygame.mixer.Sound("music//explosion.wav")
+        pygame.mixer.Sound.play(self.explosion_sound)
+        pygame.mixer.music.stop()
+
         self.image = pygame.transform.scale(pygame.image.load(self.frames[self.animation_index]), (160, 150))
         self.rect = self.image.get_rect(center=position)
 
