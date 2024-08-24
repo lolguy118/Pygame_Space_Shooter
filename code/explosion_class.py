@@ -37,6 +37,3 @@ class Explosion(pygame.sprite.Sprite):
             self.kill()
         else:
             self.animate()
-
-
-e = Explosion((3, 3))
