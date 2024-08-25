@@ -3,6 +3,9 @@ import pygame
 from event_info import EventInfo
 from typing import Any
 from player_class import Player
+from enemy_class import Enemy
+from laser_class import Laser
+from explosion_class import Explosion
 
 
 class GameState(ABC):
@@ -97,8 +100,26 @@ class MainGame(GameState):
             self.spawn_rate_adjuster += 1
             self.spawn_rate = int(self.spawn_rate / self.spawn_rate_adjuster)
             self.spawn_enemy_timer = pygame.time.set_timer(self.spawn_enemy_event, self.spawn_rate)
-    def check_if_enemy_went_kaboom(self):
-        pass
+    def check_if_enemy_went_kaboom_or_made_it_through(self):
+        enemy : Enemy
+        for enemy in self.enemies:
+            if enemy.rect.bottom >= 800 or enemy.rect.colliderect(self.player.rect):
+                self.is_over = True
+                break
+            laser : Laser
+            for laser in self.player.lasers:
+                if laser.rect.colliderect(enemy.rect):
+                    laser.kill()
+                    self.enemies.add(Explosion(enemy.rect.center))
+                    enemy.kill()
+                    self.score += 1
+                    break
+    def check_to_add_new_enemy(self, event_info : EventInfo):
+        for event in event_info["events"]:
+            if event.type == self.spawn_enemy_timer:
+                self.enemies.add(Enemy())
+                    
+
 
 
 class ResultScreen(GameState):
