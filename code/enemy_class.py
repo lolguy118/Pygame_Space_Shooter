@@ -26,7 +26,7 @@ class Enemy(pygame.sprite.Sprite):
         ).convert_alpha()
         self.image = pygame.transform.scale(self.image, (160, 150))
         self.rect = self.image.get_rect(right=choice([160, 320, 480, 640, 800]))
-        self.rect.top = 0
+        self.rect.top = -100
 
     def animate(self) -> None:
         self.animation_index += 0.1
