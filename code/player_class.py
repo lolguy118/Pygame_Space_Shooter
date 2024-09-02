@@ -29,7 +29,7 @@ class Player:
         self.lasers = pygame.sprite.Group()
 
     def animate(self) -> None:
-        self.animation_index += 0.1
+        self.animation_index += 0.5
         if int(self.animation_index) > 1:
             self.animation_index = 0
         self.image = self.player_frames[int(self.animation_index)]
