@@ -14,7 +14,6 @@ class Explosion(pygame.sprite.Sprite):
         pygame.mixer.init()
         self.explosion_sound = pygame.mixer.Sound("music//explosion.wav")
         pygame.mixer.Sound.play(self.explosion_sound)
-        pygame.mixer.music.stop()
 
         self.image = pygame.transform.scale(
             pygame.image.load(self.frames[self.animation_index]), (160, 150)
@@ -24,12 +23,12 @@ class Explosion(pygame.sprite.Sprite):
         self.animation_is_over = False
 
     def animate(self) -> None:
-        self.animation_index += 0.1
-        if int(self.animation_index) > len(self.frames):
+        self.animation_index += 0.5
+        if int(self.animation_index) > len(self.frames) - 1:
             self.animation_is_over = True
-            self.animation_index = len(self.frames)
+            self.animation_index = len(self.frames) - 1
         self.image = pygame.transform.scale(
-            pygame.image.load(self.frames[self.animation_index]), (160, 150)
+            pygame.image.load(self.frames[int(self.animation_index)]), (160, 150)
         )
 
     def update(self) -> None:

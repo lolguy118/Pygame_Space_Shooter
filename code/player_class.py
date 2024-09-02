@@ -38,18 +38,18 @@ class Player:
     def movement(self, event_info: EventInfo) -> None:
         keys_pressed = event_info["keys"]
         if keys_pressed[pygame.K_LEFT] and self.rect.left - 5 > 0:
-            self.rect.x -= 5
+            self.rect.x -= 10
         elif keys_pressed[pygame.K_RIGHT] and self.rect.right < 800:
-            self.rect.x += 5
+            self.rect.x += 10
 
     def shoot_laser(self, event_info: EventInfo):
         events = event_info["events"]
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    pygame.mixer.Sound.play(self.laser_sound)
-                    pygame.mixer.music.stop()
-                    self.lasers.add(Laser(self.rect.centerx))
+                    if self.lasers.__len__() <= 3:
+                        pygame.mixer.Sound.play(self.laser_sound)
+                        self.lasers.add(Laser(self.rect.centerx))
 
     def update(self, event_info: EventInfo):
         self.animate()
