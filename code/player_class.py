@@ -60,17 +60,3 @@ class Player:
         screen.blit(self.image, self.rect)
         self.lasers.update()
         self.lasers.draw(screen)
-
-
-if __name__ == "__main__":
-    pygame.init()
-    screen = pygame.display.set_mode((800, 800))
-    player = Player()
-    clcok = pygame.time.Clock()
-    while True:
-        screen.fill("black")
-        events = {"events": pygame.event.get(), "keys": pygame.key.get_pressed()}
-        player.update(events)
-        player.draw(screen)
-        pygame.display.update()
-        clcok.tick(60)

@@ -1,6 +1,6 @@
 import pygame
-from code.states import TitleScreen, MainGame, ResultScreen
-from code.event_info import EventInfo
+from .code.states import TitleScreen, MainGame, ResultScreen
+from .code.event_info import EventInfo
 
 class Game:
     

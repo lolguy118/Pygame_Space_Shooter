@@ -225,23 +225,3 @@ class ResultScreen(GameState):
         self.screen.blit(self.title_text_surf, self.title_rect)
         if self.text_is_visible:
             self.screen.blit(self.play_again_text_surf, self.play_again_text_rect)
-
-        
-
-
-
-
-pygame.init()
-screen = pygame.display.set_mode((800, 800))
-clock = pygame.time.Clock()
-maingame = TitleScreen(screen)
-while True:
-    event_info = {"events": pygame.event.get(), "keys" : pygame.key.get_pressed()}
-    for event in event_info["events"]:
-        if event.type == pygame.QUIT:
-            raise SystemExit
-    maingame.update(event_info)
-    maingame.draw()
-    if maingame.is_over:
-        maingame = maingame.next_game_state()
-    pygame.display.update()
