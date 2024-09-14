@@ -33,6 +33,7 @@ class GameState(ABC):
 class TitleScreen(GameState):
     def __init__(self, screen: pygame.Surface) -> None:
         super().__init__(screen)
+        pygame.font.init()
         self.title_font = pygame.font.Font(
             "assets//PixelifySans-VariableFont_wght.ttf", 100
         )
